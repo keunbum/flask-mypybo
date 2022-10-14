@@ -6,3 +6,4 @@ migrations
 venv
 *.pem
 *.ppk
+logs
