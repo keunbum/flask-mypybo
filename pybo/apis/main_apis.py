@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, json
 from flask_restful import Resource, Api
 
 bp = Blueprint('api', __name__, url_prefix='/api')
@@ -16,8 +16,7 @@ def is_valid_request():
         content = document['content']
     except KeyError:
         return None
-    except Exception:
-        print('Unpredictable error types')
+    except Exception as e:
         return None
     if (len(content) == 0
             or len(title) + len(content) > max_len):
@@ -26,6 +25,8 @@ def is_valid_request():
 
 
 class Summary(Resource):
+    def get(self):
+        return json.jsonify({'message': 'hello localhost'})
     def post(self):
         res = is_valid_request()
         if not res:
